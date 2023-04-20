@@ -9,6 +9,7 @@ function App() {
   const [input, setInput] = useState("")
   const [output, setOutput] = useState("")
   const [copy, setCopy] = useState(false)
+  const [color, setColor] = useState("#4281A4")
 
   useEffect(() => {
     if (encryptSelected) {
@@ -40,6 +41,9 @@ function App() {
     setOutput(result)
   }
 
+  const root = document.querySelector(":root")
+  root.style.setProperty("--main", color)
+
   return (
     <div className='App'>
       <div className='container'>
@@ -58,6 +62,7 @@ function App() {
               onClick={() => {
                 setEncryptSelected(true)
                 encrypt()
+                setColor("#4281A4")
               }}
               className='switch-option'
               encrypt={encryptSelected + ""}>
@@ -67,6 +72,7 @@ function App() {
               onClick={() => {
                 setEncryptSelected(false)
                 decrypt()
+                setColor("#4DA167")
               }}
               className='switch-option'
               encrypt={!encryptSelected + ""}>
@@ -76,27 +82,31 @@ function App() {
         </div>
         <div className='output-container'>
           {output ? (
-            <>
-              <h2>Resultado</h2>
-              <div className='output'>
+            <div className='output'>
+              <div>
+                <h2>Resultado</h2>
                 <p>{output}</p>
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(output)
-                    setCopy(true)
-                    setTimeout(() => {
-                      setCopy(false)
-                    }, 1500)
-                  }}
-                  className='copy-btn'>
-                  {copy ? "¡Copiado!" : "Copiar"}
-                </button>
               </div>
-            </>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(output)
+                  setCopy(true)
+                  setTimeout(() => {
+                    setCopy(false)
+                  }, 1500)
+                }}
+                className='copy-btn'>
+                {copy ? "¡Copiado!" : "Copiar"}
+              </button>
+            </div>
           ) : (
-            <p>{`el resultado de la ${
-              encryptSelected ? "encriptacion" : "desencriptación"
-            } se mostrará aquí.`}</p>
+            <div className='output'>
+              <div className='output-placeholder'>
+                <p>{`El texto ${
+                  encryptSelected ? "encriptado" : "desencriptado"
+                } aparecerá aquí.`}</p>
+              </div>
+            </div>
           )}
         </div>
       </div>

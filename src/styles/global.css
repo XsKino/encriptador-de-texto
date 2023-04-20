@@ -1,15 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap");
-
-:root {
-  --main: #f05;
-  --bg: var(--main);
-  --foreground: #dcb662;
-  --background: #fffcf2;
-  --foreground-alpha: #dcb662aa;
-}
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 
 * {
-  font-size: 24px;
+  font-size: 5.8vw;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -20,6 +13,9 @@ body {
 .App {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.32s ease-in-out;
 }
 
 .container {
@@ -34,6 +30,7 @@ body {
 }
 
 .container h1 {
+  font-family: "Lobster", "Montserrat", sans-serif;
   font-size: 2rem;
   font-weight: 400;
 }
@@ -86,7 +83,7 @@ body {
 
 .switch-option[encrypt="true"] {
   background: var(--main);
-  color: var(--background);
+  color: #fff;
 }
 
 .output-container {
@@ -104,9 +101,10 @@ body {
   overflow-wrap: break-word;
 }
 
-.output > p {
+.output p {
   font-size: 0.6rem;
   padding-top: 0.5rem;
+  max-width: 100%;
 }
 
 .copy-btn {
@@ -144,4 +142,61 @@ footer > div {
 
 .container > div {
   width: 100%;
+}
+
+.output .output-placeholder {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.output-placeholder p {
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0.5;
+}
+
+button {
+  user-select: none;
+}
+
+@media (min-width: 400px) {
+  * {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 600px) {
+  .App {
+    justify-content: space-between;
+  }
+
+  .container {
+    flex-direction: row;
+    gap: 2rem;
+    flex: 1;
+  }
+
+  .input-container {
+    flex: 1;
+    height: 100%;
+  }
+
+  .output-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: calc(50% - 1rem);
+  }
+
+  .output {
+    flex: 1;
+    margin: 0;
+    display: flex;
+    max-width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
